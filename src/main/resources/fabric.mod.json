@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "elytraboosters",
+  "version": "${version}",
+  "name": "Elytra Boosters Mod",
+  "description": "The Ultimate Firework Rocket Killer!",
+  "authors": [
+    {
+      "name": "AdrianTodt",
+      "contact": {
+        "homepage": "https://twitter.com/AdrianTodt"
+      }
+    }
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/elytraboosters",
+    "issues": "https://github.com/AdrianTodt/elytraboosters/issues",
+    "sources": "https://github.com/AdrianTodt/elytraboosters"
+  },
+  "license": "Apache-2.0",
+  "icon": "assets/elytraboosters/textures/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "net.adriantodt.elytraboosters.ElytraBoosters"
+      }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "net.adriantodt.elytraboosters.ElytraBoostersClient"
+      }
+    ],
+    "modmenu": [
+      "net.adriantodt.elytraboosters.integration.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "elytraboosters.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.8.7",
+    "fabric": "*",
+    "fabric-language-kotlin": "*",
+    "minecraft": "1.16.x"
+  }
+}

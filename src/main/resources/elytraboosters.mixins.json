@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.adriantodt.elytraboosters.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PlayerInventoryMixin",
+    "PlayerManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
