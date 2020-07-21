@@ -1,0 +1,14 @@
+val io = Hardware.textMode()
+while(true) {
+    io.posX = 0
+    io.posY = 0
+    io.println("Hello World")
+    Native.sleep(100)
+    io.fg = 8
+    io.posX = 0
+    io.posY = 0
+    io.print("Hello World")
+    io.fg = 0
+    io.offX++
+    io.offY++
+}
