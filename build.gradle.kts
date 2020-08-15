@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "io.github.cafeteriaguild"
-version = "0.1"
+version = "0.2"
 
 repositories {
     mavenCentral()
@@ -31,15 +31,16 @@ dependencies {
     //api(kotlin("scripting-jsr223"))
     //api(kotlin("scripting-jsr223-embeddable"))
     implementation("it.unimi.dsi:fastutil:8.3.1")
-    api("io.github.cafeteriaguild:Lin:0.1.2")
+    api("io.github.cafeteriaguild:Lin:0.2.1")
     implementation("com.github.adriantodt:tartar:1.5.3")
+    //implementation("pw.aru.libs:eventpipes:LATEST")
 }
 
 configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_10
 }
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "10"
     kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
 }
 

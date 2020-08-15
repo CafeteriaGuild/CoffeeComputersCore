@@ -1,6 +1,6 @@
 package io.github.cafeteriaguild.coffeecomputers.core.ui
 
-import io.github.cafeteriaguild.coffeecomputers.core.screen.ScreenSize
+import io.github.cafeteriaguild.coffeecomputers.core.screen.ComputerScreen
 import java.awt.Color
 import java.awt.Graphics
 import java.awt.Graphics2D
@@ -15,18 +15,16 @@ import javax.swing.JPanel
 import kotlin.math.min
 
 
-class ComputerPanel(val screenSize: ScreenSize) : JPanel() {
+class ComputerPanel(val screen: ComputerScreen) : JPanel() {
     private val frameLock = Semaphore(1)
     private val frameCount = AtomicLong()
     private val framerate = AtomicLong()
-    val framebuffer = AWTFramebuffer(screenSize)
 
     init {
 
         border = BorderFactory.createLineBorder(Color.black)
         Executors.newSingleThreadScheduledExecutor()
             .scheduleAtFixedRate({
-                framebuffer.commitChanges()
                 frameLock.release()
                 repaint()
             }, 0, 16666, TimeUnit.MICROSECONDS)
@@ -44,7 +42,7 @@ class ComputerPanel(val screenSize: ScreenSize) : JPanel() {
 
     override fun paintComponent(g: Graphics) {
         if (!frameLock.tryAcquire()) return
-        val asyncImage = supplyAsync(framebuffer::render)
+        val asyncImage = supplyAsync { AWTRenderer.renderToImage(screen.size, screen.copyOfFrame()) }
         frameCount.incrementAndGet()
 
         (g as? Graphics2D)?.apply {
@@ -55,9 +53,9 @@ class ComputerPanel(val screenSize: ScreenSize) : JPanel() {
         with(g) {
             val w = size.width
             val h = size.height
-            val ratio = min(w.toDouble() / screenSize.width, h.toDouble() / screenSize.height)
-            val imgW = screenSize.width * ratio
-            val imgH = screenSize.height * ratio
+            val ratio = min(w.toDouble() / screen.size.width, h.toDouble() / screen.size.height)
+            val imgW = screen.size.width * ratio
+            val imgH = screen.size.height * ratio
 
             color = AWTScreenColors.black.brighter()
             fillRect(0, 0, w, h)
