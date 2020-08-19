@@ -25,7 +25,9 @@ class TextMode(private val computer: Computer) : LinNativeObj() {
     private val offsetHeight = computer.screen.size.height % 9 / 2
     private val offsetWidth = computer.screen.size.width % 6 / 2
 
-    private fun newLineBuffer() = CharArray(textWidth) { ' ' }
+    data class CharData(val char: Char, val fg: Byte?, val bg: Byte?)
+
+    private fun newLineBuffer() = Array(textWidth) { CharData(' ', 0, 15) }
 
     private val textBuffer = Array(textHeight) { newLineBuffer() }
 
@@ -61,23 +63,23 @@ class TextMode(private val computer: Computer) : LinNativeObj() {
                         textBuffer[textBuffer.lastIndex] = newLineBuffer()
                     }
                 } else if (posX < textWidth) {
-                    textBuffer[posY][posX++] = char
+                    textBuffer[posY][posX++] = CharData(char, fg, bg)
                 } else if (posY + 1 < textHeight) {
                     posY += 1
                     posX = 0
-                    textBuffer[posY][posX++] = char
+                    textBuffer[posY][posX++] = CharData(char, fg, bg)
                 } else {
                     textBuffer.copyInto(textBuffer, startIndex = 1)
                     textBuffer[textBuffer.lastIndex] = newLineBuffer()
-                    textBuffer[posY][posX++] = char
+                    textBuffer[posY][posX++] = CharData(char, fg, bg)
                 }
             }
 
             for ((y, line) in textBuffer.withIndex()) {
-                for ((x, char) in line.withIndex()) {
-                    for ((fy, chunk) in fontFmt[char.toInt()].chunked(8).withIndex()) {
+                for ((x, data) in line.withIndex()) {
+                    for ((fy, chunk) in fontFmt[data.char.toInt()].chunked(8).withIndex()) {
                         for ((fx, raw) in chunk.withIndex()) {
-                            val color = if (raw == '1') fg else bg
+                            val color = if (raw == '1') data.fg else data.bg
                             if (color != null) {
                                 computer.screen.setPixel(x * 6 + fx + offX, y * 9 + fy + offY, color)
                             }
@@ -91,7 +93,7 @@ class TextMode(private val computer: Computer) : LinNativeObj() {
             _posY.set(LInt(posY))
             //endregion
         }
-        computer.events.onSuggestRender(computer)
+        computer.outputEvents.onSuggestRender(computer)
     }
 
 //    private fun doChars(s: String) {

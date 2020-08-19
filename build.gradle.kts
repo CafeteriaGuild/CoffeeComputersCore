@@ -4,7 +4,7 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.4.0"
     maven
     `maven-publish`
     //application
@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "io.github.cafeteriaguild"
-version = "0.2"
+version = "0.3"
 
 repositories {
     mavenCentral()
@@ -30,10 +30,10 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     //api(kotlin("scripting-jsr223"))
     //api(kotlin("scripting-jsr223-embeddable"))
-    implementation("it.unimi.dsi:fastutil:8.3.1")
-    api("io.github.cafeteriaguild:Lin:0.2.1")
+    //implementation("it.unimi.dsi:fastutil:8.3.1")
+    api("io.github.cafeteriaguild:Lin:0.4.1")
     implementation("com.github.adriantodt:tartar:1.5.3")
-    //implementation("pw.aru.libs:eventpipes:LATEST")
+    implementation("pw.aru.libs:eventpipes:1.5")
 }
 
 configure<JavaPluginConvention> {

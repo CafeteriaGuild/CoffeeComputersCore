@@ -14,13 +14,18 @@
 //}
 
 val io = hw.screen.textMode()
-
 var i = 0
 
-io.println("CraftOS"
+io.fg = 7
+io.println("(echoing keyboard)")
+io.fg = 0
 
-while (true) {
-    io.println("Hello World! $i")
-    hw.sleep(1000)
-    i++
+for ((type, data) in hw.eventQueue()) {
+    if (type == "key" && data == 28) {
+        io.print('\n')
+    }
+    if (type == "char") {
+        io.print(data)
+        if (++io.fg > 14) io.fg = 0
+    }
 }

@@ -19,9 +19,13 @@ class ComputerPanel(val screen: ComputerScreen) : JPanel() {
     private val frameLock = Semaphore(1)
     private val frameCount = AtomicLong()
     private val framerate = AtomicLong()
+    private var frame = screen.copyOfFrame()
+
+    fun refreshFrame() {
+        frame = screen.copyOfFrame()
+    }
 
     init {
-
         border = BorderFactory.createLineBorder(Color.black)
         Executors.newSingleThreadScheduledExecutor()
             .scheduleAtFixedRate({
@@ -42,7 +46,7 @@ class ComputerPanel(val screen: ComputerScreen) : JPanel() {
 
     override fun paintComponent(g: Graphics) {
         if (!frameLock.tryAcquire()) return
-        val asyncImage = supplyAsync { AWTRenderer.renderToImage(screen.size, screen.copyOfFrame()) }
+        val asyncImage = supplyAsync { AWTRenderer.renderToImage(screen.size, frame) }
         frameCount.incrementAndGet()
 
         (g as? Graphics2D)?.apply {
