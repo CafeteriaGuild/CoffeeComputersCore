@@ -25,6 +25,10 @@ fun main() {
             frame.dispose()
         }
     })
+    //for (i in 0..screen.size.width * screen.size.height) {
+    //    screen.setPixel(i, Random.nextInt(15).toByte())
+    //}
+    //panel.refreshFrame()
     computer.start(ComputerPanel::class.java.getResourceAsStream("/bios.txt").reader())
 
     with(frame) {
