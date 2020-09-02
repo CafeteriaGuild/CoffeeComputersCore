@@ -34,6 +34,7 @@ dependencies {
     api("io.github.cafeteriaguild:Lin:0.4.1")
     implementation("com.github.adriantodt:tartar:1.5.3")
     implementation("pw.aru.libs:eventpipes:1.5")
+    implementation("com.github.cretz.asmble:asmble-compiler:0.4.0")
 }
 
 configure<JavaPluginConvention> {

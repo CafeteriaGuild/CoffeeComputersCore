@@ -29,7 +29,7 @@ fun main() {
     //    screen.setPixel(i, Random.nextInt(15).toByte())
     //}
     //panel.refreshFrame()
-    computer.start(ComputerPanel::class.java.getResourceAsStream("/bios.txt").reader())
+    computer.start(ComputerPanel::class.java.getResourceAsStream("/bios.wat").reader())
 
     with(frame) {
         //background = AWTScreenColors.black.brighter()
@@ -41,21 +41,21 @@ fun main() {
             override fun keyTyped(e: KeyEvent) {
                 val ch = e.keyChar
                 if ((ch >= 32.toChar() && ch <= 126.toChar()) || (ch >= 160.toChar() && ch <= 255.toChar())) {
-                    computer.sendCharEvent(ch)
+//                    computer.sendCharEvent(ch)
                 }
             }
 
             override fun keyPressed(e: KeyEvent) {
                 val i = KeyboardRemap.remapFromAWT(e.keyCode)
                 if (i != 0) {
-                    computer.sendKeyEvent(i)
+//                    computer.sendKeyEvent(i)
                 }
             }
 
             override fun keyReleased(e: KeyEvent) {
                 val i = KeyboardRemap.remapFromAWT(e.keyCode)
                 if (i != 0) {
-                    computer.sendKeyUpEvent(i)
+//                    computer.sendKeyUpEvent(i)
                 }
             }
         })

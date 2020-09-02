@@ -6,18 +6,17 @@ import io.github.cafeteriaguild.lin.rt.lib.LObj
 import io.github.cafeteriaguild.lin.rt.lib.lang.LString
 import io.github.cafeteriaguild.lin.rt.lib.nativelang.LinNativeObj
 import io.github.cafeteriaguild.lin.rt.lib.nativelang.routes.LinNativeIterator
-import io.github.cafeteriaguild.lin.rt.utils.returningUnit
 import java.util.concurrent.LinkedBlockingQueue
 
 class EventQueueLObj(private val computer: Computer, private val raw: Boolean) : LinNativeObj(), LinNativeIterator {
     val queue = LinkedBlockingQueue<Pair<String, LObj>>()
-    val subscription = computer.internalEvents.subscribe { queue.offer(it) }
+//    val subscription = computer.internalEvents.subscribe { queue.offer(it) }
 
     init {
         declareIteratorFromNative()
-        declareFunction("close") {
-            returningUnit { subscription.close() }
-        }
+//        declareFunction("close") {
+//            returningUnit { subscription.close() }
+//        }
     }
 
     override fun hasNext(): Boolean {
@@ -33,6 +32,6 @@ class EventQueueLObj(private val computer: Computer, private val raw: Boolean) :
     }
 
     fun close() {
-        subscription.close()
+//        subscription.close()
     }
 }

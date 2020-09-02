@@ -16,7 +16,7 @@ class ComputerScreenLObj(private val computer: Computer) : LinNativeObj() {
             returningUnit {
                 val x = (_x as LNumber).value.toInt()
                 val y = (_y as LNumber).value.toInt()
-                val b = (_b as LNumber).value.toByte()
+                val b = (_b as LNumber).value.toInt()
                 if (b !in 0..15) {
                     throw LinThrownException("illegal_argument", "Invalid color value")
                 }

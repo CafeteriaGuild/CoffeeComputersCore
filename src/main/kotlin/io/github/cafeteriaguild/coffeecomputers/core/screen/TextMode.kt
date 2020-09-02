@@ -25,7 +25,7 @@ class TextMode(private val computer: Computer) : LinNativeObj() {
     private val offsetHeight = computer.screen.size.height % 9 / 2
     private val offsetWidth = computer.screen.size.width % 6 / 2
 
-    data class CharData(val char: Char, val fg: Byte?, val bg: Byte?)
+    data class CharData(val char: Char, val fg: Int?, val bg: Int?)
 
     private fun newLineBuffer() = Array(textWidth) { CharData(' ', 0, 15) }
 
@@ -49,8 +49,8 @@ class TextMode(private val computer: Computer) : LinNativeObj() {
             var posY = (_posY.get() as LNumber).value.toInt()
             val offX = (_offX.get() as LNumber).value.toInt()
             val offY = (_offY.get() as LNumber).value.toInt()
-            val fg = (_fg.get() as? LNumber)?.value?.toByte()
-            val bg = (_bg.get() as? LNumber)?.value?.toByte()
+            val fg = (_fg.get() as? LNumber)?.value?.toInt()
+            val bg = (_bg.get() as? LNumber)?.value?.toInt()
             //endregion
 
             for (char in string) {

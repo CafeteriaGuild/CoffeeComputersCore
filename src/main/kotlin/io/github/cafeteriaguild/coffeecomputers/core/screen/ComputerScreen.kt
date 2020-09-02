@@ -11,16 +11,20 @@ class ComputerScreen(val size: ScreenSize) {
     private val frameLock = ReentrantLock(true)
     private val framebuffer = ByteArray(screenSize) { 15 }
 
-    fun setPixel(pos: Int, color: Byte) {
+    fun setPixel(pos: Int, color: Int) {
         if (pos in 0 until screenSize) {
             check(color in 0..maxColorValue) { "Invalid color value" }
             frameLock.withLock {
-                framebuffer[pos] = color
+                framebuffer[pos] = color.toByte()
             }
         }
     }
 
-    fun setPixel(x: Int, y: Int, color: Byte) {
+    fun getPixel(pos: Int): Int {
+        return frameLock.withLock { framebuffer[pos] }.toInt()
+    }
+
+    fun setPixel(x: Int, y: Int, color: Int) {
         setPixel(x + y * size.width, color)
     }
 
