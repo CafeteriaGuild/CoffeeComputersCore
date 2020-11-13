@@ -1,7 +1,7 @@
 package net.adriantodt.elytraboosters.mixin;
 
 import net.adriantodt.elytraboosters.ExpandedPlayerInventory;
-import net.adriantodt.elytraboosters.item.ActiveBoosterItem;
+import net.adriantodt.elytraboosters.item.BoosterItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
@@ -138,15 +138,15 @@ public abstract class PlayerInventoryMixin implements ExpandedPlayerInventory {
         for (int i = 0; i < this.offHand.size(); i++) {
             ItemStack itemStack = this.offHand.get(i);
             Item item = itemStack.getItem();
-            if (!Objects.equals(itemStack, ignore) && item instanceof ActiveBoosterItem) {
-                this.offHand.set(i, ((ActiveBoosterItem) item).deactivateBooster(itemStack));
+            if (!Objects.equals(itemStack, ignore) && item instanceof BoosterItem) {
+                itemStack.getOrCreateTag().putBoolean("Active", false);
             }
         }
         for (int i = 0; i < this.main.size(); i++) {
             ItemStack itemStack = this.main.get(i);
             Item item = itemStack.getItem();
-            if (!Objects.equals(itemStack, ignore) && item instanceof ActiveBoosterItem) {
-                this.main.set(i, ((ActiveBoosterItem) item).deactivateBooster(itemStack));
+            if (!Objects.equals(itemStack, ignore) && item instanceof BoosterItem) {
+                itemStack.getOrCreateTag().putBoolean("Active", false);
             }
         }
     }

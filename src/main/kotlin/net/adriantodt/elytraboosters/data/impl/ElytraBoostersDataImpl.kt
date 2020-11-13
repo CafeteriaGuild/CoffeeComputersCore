@@ -1,11 +1,8 @@
 package net.adriantodt.elytraboosters.data.impl
 
 import net.adriantodt.elytraboosters.ElytraBoostersItems.fastBooster
-import net.adriantodt.elytraboosters.ElytraBoostersItems.fastBoosterActive
 import net.adriantodt.elytraboosters.ElytraBoostersItems.slowBooster
-import net.adriantodt.elytraboosters.ElytraBoostersItems.slowBoosterActive
 import net.adriantodt.elytraboosters.ElytraBoostersItems.standardBooster
-import net.adriantodt.elytraboosters.ElytraBoostersItems.standardBoosterActive
 import net.adriantodt.elytraboosters.data.ElytraBoostersConfig
 import net.adriantodt.elytraboosters.data.ElytraBoostersData
 import net.adriantodt.elytraboosters.data.ElytraBoostersData.BoosterType
@@ -21,9 +18,9 @@ class ElytraBoostersDataImpl(config: ElytraBoostersConfig) : ElytraBoostersData 
     )
 
     private val boosterMap = mapOf(
-        STANDARD to BoosterDataImpl(STANDARD.booster(config), fun() = standardBooster, fun() = standardBoosterActive),
-        SLOW to BoosterDataImpl(SLOW.booster(config), fun() = slowBooster, fun() = slowBoosterActive),
-        FAST to BoosterDataImpl(FAST.booster(config), fun() = fastBooster, fun() = fastBoosterActive)
+        STANDARD to BoosterDataImpl(STANDARD.booster(config)),
+        SLOW to BoosterDataImpl(SLOW.booster(config)),
+        FAST to BoosterDataImpl(FAST.booster(config))
     )
 
     override fun booster(type: BoosterType) = boosterMap[type] ?: error("Impossible.")

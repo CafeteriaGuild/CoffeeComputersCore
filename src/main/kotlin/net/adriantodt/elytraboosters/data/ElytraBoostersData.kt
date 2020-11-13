@@ -1,6 +1,5 @@
 package net.adriantodt.elytraboosters.data
 
-import net.adriantodt.elytraboosters.item.ActiveBoosterItem
 import net.adriantodt.elytraboosters.item.BoosterItem
 import net.adriantodt.elytraboosters.plus
 import net.adriantodt.elytraboosters.times
@@ -35,9 +34,6 @@ interface ElytraBoostersData {
     interface BoosterData : BoosterVelocity {
         var ticksPerDamage: Int
 
-        val boosterItem: BoosterItem
-        val activeBoosterItem: ActiveBoosterItem
-
         fun convertTo(stack: ItemStack, item: Item): ItemStack {
             val converted = ItemStack(item)
             converted.damage = stack.damage
@@ -46,9 +42,6 @@ interface ElytraBoostersData {
             tag?.getBoolean("Unbreakable")?.let { converted.orCreateTag.putBoolean("Unbreakable", it) }
             return converted
         }
-
-        fun toActiveBooster(stack: ItemStack) = convertTo(stack, activeBoosterItem)
-        fun toBooster(stack: ItemStack) = convertTo(stack, boosterItem)
 
         fun secondsLeft(stack: ItemStack): Double {
             val damageTicksLeft = (stack.maxDamage - stack.damage) * ticksPerDamage

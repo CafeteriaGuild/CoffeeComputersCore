@@ -2,5 +2,13 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "elytraboosters:item/booster_standard"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "elytraboosters:active_booster": 1
+      },
+      "model": "elytraboosters:item/booster_standard_active"
+    }
+  ]
 }
