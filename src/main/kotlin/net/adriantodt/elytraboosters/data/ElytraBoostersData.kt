@@ -50,14 +50,14 @@ interface ElytraBoostersData {
         }
     }
 
-    interface FuelPelletData {
-        val standardPellets: Int
-        val fastPellets: Int
-        val slowPellets: Int
+    interface FuelCartridgeData {
+        val standardCartridges: Int
+        val fastCartridges: Int
+        val slowCartridges: Int
         val resultItem: BoosterItem
     }
 
     val launcherVelocity: BoosterVelocity
     fun booster(type: BoosterType): BoosterData
-    fun fuelPellet(type: BoosterType): FuelPelletData
+    fun fuelCartridge(type: BoosterType): FuelCartridgeData
 }

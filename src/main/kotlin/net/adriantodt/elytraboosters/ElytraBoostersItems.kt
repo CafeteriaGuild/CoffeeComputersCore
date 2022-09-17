@@ -4,7 +4,7 @@ import net.adriantodt.elytraboosters.ElytraBoosters.data
 import net.adriantodt.elytraboosters.data.ElytraBoostersData.BoosterType.*
 import net.adriantodt.elytraboosters.item.BoosterItem
 import net.adriantodt.elytraboosters.item.ForwardLauncherItem
-import net.adriantodt.elytraboosters.item.FuelPelletItem
+import net.adriantodt.elytraboosters.item.FuelCartridgeItem
 import net.adriantodt.elytraboosters.item.LoreItem
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -22,9 +22,9 @@ object ElytraBoostersItems {
 
     val forwardLauncher = ForwardLauncherItem(toolSettings().maxDamage(128), data.launcherVelocity)
 
-    val standardFuelPellet = FuelPelletItem(itemSettings(), data.fuelPellet(STANDARD))
-    val slowFuelPellet = FuelPelletItem(itemSettings(), data.fuelPellet(SLOW))
-    val fastFuelPellet = FuelPelletItem(itemSettings(), data.fuelPellet(FAST))
+    val standardFuelCartridge = FuelCartridgeItem(itemSettings(), data.fuelCartridge(STANDARD))
+    val slowFuelCartridge = FuelCartridgeItem(itemSettings(), data.fuelCartridge(SLOW))
+    val fastFuelCartridge = FuelCartridgeItem(itemSettings(), data.fuelCartridge(FAST))
 
     fun register() {
         identifier("booster_empty").item(emptyBooster)
@@ -33,9 +33,9 @@ object ElytraBoostersItems {
         identifier("booster_slow").item(slowBooster)
         identifier("forward_launcher").item(forwardLauncher)
 
-        identifier("fuel_pellet_standard").item(standardFuelPellet)
-        identifier("fuel_pellet_fast").item(fastFuelPellet)
-        identifier("fuel_pellet_slow").item(slowFuelPellet)
+        identifier("fuel_cartridge_standard").item(standardFuelCartridge)
+        identifier("fuel_cartridge_fast").item(fastFuelCartridge)
+        identifier("fuel_cartridge_slow").item(slowFuelCartridge)
     }
 
     fun boosterItems() = listOf(fastBooster, standardBooster, slowBooster)

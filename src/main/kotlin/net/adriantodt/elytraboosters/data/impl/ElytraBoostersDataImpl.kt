@@ -12,9 +12,9 @@ class ElytraBoostersDataImpl(config: ElytraBoostersConfig) : ElytraBoostersData 
     override val launcherVelocity = BoosterVelocityImpl(config.forwardLauncher)
 
     private val fuelPelletMap = mapOf(
-        STANDARD to FuelPelletDataImpl(3, 0, 0, fun() = standardBooster),
-        FAST to FuelPelletDataImpl(2, 1, 0, fun() = fastBooster),
-        SLOW to FuelPelletDataImpl(2, 0, 1, fun() = slowBooster)
+        STANDARD to FuelCartridgeDataImpl(3, 0, 0, fun() = standardBooster),
+        FAST to FuelCartridgeDataImpl(2, 1, 0, fun() = fastBooster),
+        SLOW to FuelCartridgeDataImpl(2, 0, 1, fun() = slowBooster)
     )
 
     private val boosterMap = mapOf(
@@ -24,7 +24,7 @@ class ElytraBoostersDataImpl(config: ElytraBoostersConfig) : ElytraBoostersData 
     )
 
     override fun booster(type: BoosterType) = boosterMap[type] ?: error("Impossible.")
-    override fun fuelPellet(type: BoosterType) = fuelPelletMap[type] ?: error("Impossible.")
+    override fun fuelCartridge(type: BoosterType) = fuelPelletMap[type] ?: error("Impossible.")
 
     private fun BoosterType.booster(config: ElytraBoostersConfig) = when (this) {
         STANDARD -> config.standardBooster
