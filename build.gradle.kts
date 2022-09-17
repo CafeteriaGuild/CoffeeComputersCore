@@ -18,22 +18,16 @@ version = "0.3"
 
 repositories {
     mavenCentral()
-    jcenter()
-    repositories {
-        maven {
-            setUrl("https://dl.bintray.com/adriantodt/maven")
-        }
-    }
+    mavenLocal()
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-    //api(kotlin("scripting-jsr223"))
-    //api(kotlin("scripting-jsr223-embeddable"))
-    //implementation("it.unimi.dsi:fastutil:8.3.1")
-    api("io.github.cafeteriaguild:Lin:0.4.1")
-    implementation("com.github.adriantodt:tartar:1.5.3")
-    implementation("pw.aru.libs:eventpipes:1.5")
+    implementation("com.sparkjava:spark-core:2.9.3")
+    implementation("ch.qos.logback:logback-classic:1.2.3")
+    implementation("org.jetbrains:annotations:20.1.0")
+    implementation("com.grack:nanojson:1.7")
+    implementation("net.adriantodt:tinypipe:1.0")
+    implementation("org.yaml:snakeyaml:1.28")
 }
 
 configure<JavaPluginConvention> {

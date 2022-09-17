@@ -29,7 +29,7 @@ fun main() {
     //    screen.setPixel(i, Random.nextInt(15).toByte())
     //}
     //panel.refreshFrame()
-    computer.start(ComputerPanel::class.java.getResourceAsStream("/bios.txt").reader())
+    computer.start(ComputerPanel::class.java.getResourceAsStream("/bios.txt")!!.reader())
 
     with(frame) {
         //background = AWTScreenColors.black.brighter()

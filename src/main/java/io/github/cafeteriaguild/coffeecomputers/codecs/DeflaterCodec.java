@@ -1,4 +1,4 @@
-package io.github.cafeteriaguild.coffeecomputers.core.codecs;
+package io.github.cafeteriaguild.coffeecomputers.codecs;
 
 import org.jetbrains.annotations.NotNull;
 
